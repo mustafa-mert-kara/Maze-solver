@@ -20,30 +20,41 @@ def find_cell_center(x1,y1,x2,y2):
     return (x1+x2)//2,(y1+y2)//2
 
 class Cell():
-    def __init__(self,x1,y1,x2,y2,window):        
+    def __init__(self,window):        
         self.has_left_wall=True
         self.has_right_wall=True
         self.has_top_wall=True
         self.has_bottom_wall=True
+        self._x1=None
+        self._x2=None
+        self._y1=None
+        self._y2=None
+        self._visited=False
+        self._win=window
+
+    def draw(self,x1,y1,x2,y2):
         self._x1=x1
         self._x2=x2
         self._y1=y1
         self._y2=y2
-        self._win=window
-
-    def draw(self):
+        if self._win is None:
+            return
         if self.has_left_wall:
-            print("On Left")
             self._win.draw_line(Line(Point(self._x1,self._y1),Point(self._x1,self._y2)),"black")
+        else:
+            self._win.draw_line(Line(Point(self._x1,self._y1),Point(self._x1,self._y2)),"#d9d9d9")
         if self.has_right_wall:
-            print("On Right")
             self._win.draw_line(Line(Point(self._x2,self._y1),Point(self._x2,self._y2)),"black")
+        else:
+            self._win.draw_line(Line(Point(self._x2,self._y1),Point(self._x2,self._y2)),"#d9d9d9")
         if self.has_top_wall:
-            print("On Top")
             self._win.draw_line(Line(Point(self._x1,self._y1),Point(self._x2,self._y1)),"black")
+        else:
+            self._win.draw_line(Line(Point(self._x1,self._y1),Point(self._x2,self._y1)),"#d9d9d9")
         if self.has_bottom_wall:
-            print("On Bottom")
             self._win.draw_line(Line(Point(self._x1,self._y2),Point(self._x2,self._y2)),"black")
+        else:
+            self._win.draw_line(Line(Point(self._x1,self._y2),Point(self._x2,self._y2)),"#d9d9d9")
 
     def draw_move(self, to_cell, undo=False):
         if undo:
