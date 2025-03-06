@@ -49,12 +49,8 @@ class Maze():
         elif row1>row2:
             return self._cells[row1][col1].has_top_wall
         elif col1<col2:
-            # print("col1<col2")
-            # print(self._cells[row1][col1].has_right_wall)
             return self._cells[row1][col1].has_right_wall
         else:
-            # print("col1>col2")
-            # print(self._cells[row1][col1].has_right_wall)
             return self._cells[row1][col1].has_left_wall
     
     def _break_walls(self,row1,col1,row2,col2):
@@ -111,7 +107,7 @@ class Maze():
         if self._win is None:
             return
         self._win.redraw()
-        # time.sleep(0.05)
+        time.sleep(0.05)
 
     def solve_r(self,i,j):
         print("in cell",i,j)
